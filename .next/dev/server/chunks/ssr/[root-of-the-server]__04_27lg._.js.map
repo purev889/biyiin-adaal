@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///home/purevtsend/school%20pro/pages/_app.js"],"sourcesContent":["// pages/_app.js\n// Global app wrapper — keeps CSS reset consistent with the main page\n\nimport '../styles/globals.css';\n\nexport default function App({ Component, pageProps }) {\n  return <Component {...pageProps} />;\n}\n"],"names":["App","Component","pageProps"],"mappings":"AAAA,gBAAgB;AAChB,qEAAqE;;;;;;;;AAItD,SAASA,IAAI,EAAEC,SAAS,EAAEC,SAAS,EAAE;IAClD,qBAAO,qKAACD;QAAW,GAAGC,SAAS;;;;;;AACjC"}}]
+}
