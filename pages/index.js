@@ -185,7 +185,6 @@ export default function HomePage() {
       <Head>
         <title>INTERSTELLAR — Beyond the Stars</title>
         <meta name="description" content="A cinematic journey beyond the horizon of time and space." />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Lato:wght@300;400;700&display=swap"
