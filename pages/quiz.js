@@ -1031,116 +1031,132 @@ function QuestionCard({ question, index, total, selectedIdx, onSelect, revealed,
         display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4,
       }}>
         {question.options.map((opt, i) => {
-          const isPicked   = i === selectedIdx;
-          const isCorrect  = revealed && correctIndex !== null && i === correctIndex;
-          const isWrong    = revealed && isPicked && !isCorrect;
+  const isPicked   = i === selectedIdx;
+  const isCorrect  = revealed && correctIndex !== null && i === correctIndex;
+  const isWrong    = revealed && isPicked && !isCorrect;
 
-          // Visual states
-          let borderColor, bg, labelBg, labelColor, textColor, boxShadow, transform;
+  let borderColor, bg, labelBg, labelColor, textColor, boxShadow, transform;
 
-          if (revealed && isCorrect) {
-            borderColor = 'rgba(60,200,100,0.55)';
-            bg          = 'rgba(40,160,70,0.10)';
-            labelBg     = 'rgba(60,200,100,0.18)';
-            labelColor  = 'rgba(60,200,100,0.9)';
-            textColor   = 'rgba(237,233,223,0.9)';
-            boxShadow   = '0 0 20px rgba(60,200,100,0.1)';
-            transform   = 'none';
-          } else if (revealed && isWrong) {
-            borderColor = 'rgba(200,70,60,0.55)';
-            bg          = 'rgba(200,50,50,0.08)';
-            labelBg     = 'rgba(200,70,60,0.18)';
-            labelColor  = 'rgba(200,70,60,0.9)';
-            textColor   = 'rgba(120,120,145,0.45)';
-            boxShadow   = 'none';
-            transform   = 'none';
-          } else if (isPicked) {
-            borderColor = 'rgba(240,160,0,0.65)';
-            bg          = 'rgba(240,160,0,0.06)';
-            labelBg     = 'rgba(240,160,0,0.2)';
-            labelColor  = '#F0A000';
-            textColor   = '#EDE9DF';
-            boxShadow   = '0 0 24px rgba(240,160,0,0.12), inset 0 0 16px rgba(240,160,0,0.03)';
-            transform   = 'translateY(-1px)';
-          } else {
-            borderColor = 'rgba(255,255,255,0.07)';
-            bg          = 'rgba(0,0,14,0.70)';
-            labelBg     = 'rgba(255,255,255,0.04)';
-            labelColor  = 'rgba(122,122,146,0.6)';
-            textColor   = '#7A7A92';
-            boxShadow   = 'none';
-            transform   = 'none';
-          }
+  if (revealed && isCorrect) {
+    borderColor = 'rgba(60,200,100,0.55)';
+    bg          = 'rgba(40,160,70,0.10)';
+    labelBg     = 'rgba(60,200,100,0.18)';
+    labelColor  = 'rgba(60,200,100,0.9)';
+    textColor   = '#FFFFFF';
+    boxShadow   = '0 0 20px rgba(60,200,100,0.1)';
+    transform   = 'none';
+  } else if (revealed && isWrong) {
+    borderColor = 'rgba(200,70,60,0.55)';
+    bg          = 'rgba(200,50,50,0.08)';
+    labelBg     = 'rgba(200,70,60,0.18)';
+    labelColor  = 'rgba(200,70,60,0.9)';
+    textColor   = 'rgba(255,255,255,0.45)';
+    boxShadow   = 'none';
+    transform   = 'none';
+  } else if (isPicked) {
+    borderColor = 'rgba(240,160,0,0.65)';
+    bg          = 'rgba(240,160,0,0.08)';
+    labelBg     = 'rgba(240,160,0,0.22)';
+    labelColor  = '#F0A000';
+    textColor   = '#FFFFFF';
+    boxShadow   = '0 0 24px rgba(240,160,0,0.12)';
+    transform   = 'translateY(-1px)';
+  } else {
+    borderColor = 'rgba(255,255,255,0.10)';
+    bg          = 'rgba(0,0,14,0.75)';
+    labelBg     = 'rgba(255,255,255,0.05)';
+    labelColor  = 'rgba(200,200,220,0.7)';
+    textColor   = 'rgba(255,255,255,0.85)';
+    boxShadow   = 'none';
+    transform   = 'none';
+  }
 
-          return (
-            <button
-              key={i}
-              onClick={() => !revealed && onSelect(i)}
-              style={{
-                background: bg,
-                border: `1px solid ${borderColor}`,
-                padding: '18px 20px',
-                textAlign: 'left',
-                cursor: revealed ? 'default' : 'pointer',
-                transition: 'all 0.28s ease',
-                position: 'relative', overflow: 'hidden',
-                backdropFilter: 'blur(8px)',
-                boxShadow,
-                transform,
-                display: 'flex', alignItems: 'flex-start', gap: 14,
-                animation: `optionReveal 0.4s ease forwards ${i * 0.06}s`,
-                opacity: 0,
-              }}
-              onMouseEnter={e => {
-                if (revealed || isPicked) return;
-                e.currentTarget.style.borderColor = 'rgba(240,160,0,0.35)';
-                e.currentTarget.style.background  = 'rgba(240,160,0,0.04)';
-                e.currentTarget.style.boxShadow   = '0 0 18px rgba(240,160,0,0.08)';
-                e.currentTarget.style.transform   = 'translateY(-2px)';
-              }}
-              onMouseLeave={e => {
-                if (revealed || isPicked) return;
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
-                e.currentTarget.style.background  = 'rgba(0,0,14,0.70)';
-                e.currentTarget.style.boxShadow   = 'none';
-                e.currentTarget.style.transform   = 'none';
-              }}
-            >
-              {/* Top accent on selected */}
-              {isPicked && !revealed && (
-                <div style={{
-                  position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-                  background: 'linear-gradient(90deg, transparent, rgba(240,160,0,0.6), transparent)',
-                }} />
-              )}
+  return (
+    <button
+      key={i}
+      onClick={() => !revealed && onSelect(i)}
+      style={{
+        background: bg,
+        border: `1px solid ${borderColor}`,
+        padding: '18px 20px',
+        textAlign: 'left',
+        cursor: revealed ? 'default' : 'pointer',
+        transition: 'all 0.28s ease',
+        position: 'relative',
+        overflow: 'hidden',
+        backdropFilter: 'blur(8px)',
+        boxShadow,
+        transform,
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 14,
+        animation: `optionReveal 0.4s ease forwards ${i * 0.06}s`,
+        opacity: 0,
+      }}
+      onMouseEnter={e => {
+        if (revealed || isPicked) return;
+        e.currentTarget.style.borderColor = 'rgba(240,160,0,0.35)';
+        e.currentTarget.style.background  = 'rgba(240,160,0,0.04)';
+        e.currentTarget.style.boxShadow   = '0 0 18px rgba(240,160,0,0.08)';
+        e.currentTarget.style.transform   = 'translateY(-2px)';
+      }}
+      onMouseLeave={e => {
+        if (revealed || isPicked) return;
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+        e.currentTarget.style.background  = 'rgba(0,0,14,0.75)';
+        e.currentTarget.style.boxShadow   = 'none';
+        e.currentTarget.style.transform   = 'none';
+      }}
+    >
+      {isPicked && !revealed && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 1,
+            background: 'linear-gradient(90deg, transparent, rgba(240,160,0,0.6), transparent)',
+          }}
+        />
+      )}
 
-              {/* Letter badge */}
-              <div style={{
-                width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: labelBg,
-                border: `1px solid ${borderColor}`,
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 10, fontWeight: 700, letterSpacing: 0,
-                color: labelColor,
-                transition: 'all 0.28s ease',
-                marginTop: 1,
-              }}>
-                {OPTION_LABELS[i]}
-              </div>
+      <div
+        style={{
+          width: 28,
+          height: 28,
+          borderRadius: '50%',
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: labelBg,
+          border: `1px solid ${borderColor}`,
+          fontFamily: "'Space Mono', monospace",
+          fontSize: 10,
+          fontWeight: 700,
+          color: labelColor,
+          marginTop: 1,
+        }}
+      >
+        {OPTION_LABELS[i]}
+      </div>
 
-              {/* Option text */}
-              <div style={{
-                fontFamily: "'Lato', sans-serif", fontWeight: 300,
-                fontSize: 14, lineHeight: 1.65, color: textColor,
-                transition: 'color 0.28s ease',
-                paddingTop: 4,
-              }}>
-                {opt}
-              </div>
-            </button>
-          );
-        })}
+      <div
+        style={{
+          fontFamily: "'Lato', sans-serif",
+          fontWeight: 400,
+          fontSize: 14,
+          lineHeight: 1.65,
+          color: textColor,
+          paddingTop: 4,
+        }}
+      >
+        {opt}
+      </div>
+    </button>
+  );
+})}
       </div>
     </div>
   );
